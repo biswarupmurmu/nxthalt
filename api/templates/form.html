@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Form</title>
+</head>
+<body>
+    <h1>Find bus Routes</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.source.label }}<br>
+            {{ form.source(size=32) }}<br>
+            {% for error in form.source.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.destination.label }}<br>
+            {{ form.destination(size=32) }}<br>
+            {% for error in form.destination.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.hour.label }}<br>
+            {{ form.hour(size=5) }}<br>
+            {% for error in form.hour.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.minutes.label }}<br>
+            {{ form.minutes(size=5) }}<br>
+            {% for error in form.minutes.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+	{% for path in result %}
+		<h3>From {{ path['source'] }} to {{ path['destination']}} by {{ path['bus'] }}, departure at {{ path['departure'] }}, travel time {{ path['cost']}}</h3>
+	{% endfor %}
+
+</body>
+</html>
+
