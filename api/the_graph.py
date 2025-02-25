@@ -75,13 +75,13 @@ def create_graph(mongo):
                 graph[origin].append([destination, src_departure_time, journey_time, bus['operatingDays'], bus['name']])
 
     print(f"Length of graph {len(graph)} and time problem {c}, left problem {b}")
+    print("Graph creation complete")
     return graph
 
 
 def dijkstra(graph, start, end, arrival_time, mode='time'):
     print('trying to find route between ', start, end, arrival_time)
     queue = []
-    shortest_paths = {start: [0,  None, None, arrival_time]}  # (cost(journey), source bus stand, bus name, departure_time)
     shortest_paths = {start: {'cost':0, 'source':None, 'bus':None, 'departure': arrival_time}}  # (cost(journey), source bus stand, bus name, departure_time)
     visited = set()
     

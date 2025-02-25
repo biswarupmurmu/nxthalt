@@ -10,8 +10,6 @@ def create_app():
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 
-    print(app.config)
-
     mongo = PyMongo(app)
 
     with app.app_context():
@@ -36,8 +34,10 @@ def create_app():
         form = TravelForm()
         res = ""
         if form.validate_on_submit():
-            source = form.source.data
-            destination = form.destination.data
+            source = form.data.get('source', '')
+            source = source.strip().lower()
+            destination = form.data.get('destination', '')
+            destination = destination.strip().lower()
             h = form.data.get('hour', 0)
             m = form.data.get('minutes', 0)
             h *= 60
